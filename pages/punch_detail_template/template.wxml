@@ -1,0 +1,318 @@
+<!--pages/template/template.wxml-->
+
+<!--打卡设置及发布  -->
+<!--pages/punch/punch.wxml-->
+<template name="punch_detail">
+  <view class='punch_container_wrap' data-id='1'>
+    <view class='punch_container'>
+      <!--打卡项目  -->
+      <view class='card_project'>
+        <!--打卡项目名字  -->
+        <view class='card_project_name' bindtap='ce'>
+          {{card_name}}
+        </view>
+        <!--进度条  -->
+        <view class='progress_wrap' style='position:relative'>
+          <!--进度条  -->
+          <text class='circle_ban circle_ban1'></text>
+          <progress activeColor='#fff' backgroundColor='rgba(255,255,255,0.2)' class='progress' percent="{{(punchday)/targetday*100}}" stroke-width='6' />
+          <!-- <text class='circle_ban f2'></text> -->
+          <image style='left:{{5.9*((punchday)/targetday*100)-6}}rpx' src='../../imgs/plan_circle{{num_plan}}.png'></image>
+          <!-- <text ></text> -->
+        </view>
+        <!--打卡天数  -->
+        <view class='punch_day'>
+          <text class='punchday all'>已{{total_text}}打卡{{punchday}}天</text>
+          <text class='punchday'>目标天数{{targetday}}天</text>
+        </view>
+      </view>
+      <!--日历  -->
+      <view class='calendar'>
+        <!--打卡记录  -->
+        <view class='calendar_time' style='display:flex;'>
+          <view class='calendar_time_left'>
+            <text>本周</text>
+            <text>{{detail.punchinfo.week_start}}~{{detail.punchinfo.week_end}}</text>
+          </view>
+          <view class='calendar_time_right' >
+              <form bindsubmit='punch_record' report-submit="true"  style='margin-top:14rpx;'>
+                <button plain='true'  hover-class='none' form-type="submit" style='border:none;padding:0'>
+                      <text class='an' style='font-size:28rpx;'>打卡记录</text>
+                      <image src='../../imgs/next_icon.png'></image>
+                </button>
+              </form>
+          </view>
+        </view>
+        <!--日历  -->
+        <view class='calendar_detail'>
+          <!--周  -->
+          <view class='weekday'>
+            <text wx:for='{{weekday}}'>{{item}}</text>
+          </view>
+          <!--天  -->
+          <view class='date_detail' wx:for='{{day_date}}' wx:for-index='index'>
+            <text class="{{item.is_day_clock==true? 'active' :''}}" data-index='{{index}}'>{{item.day}}</text>
+            <text class='dotted_wrap'>
+              <text class="{{item.day== dotted_hidden? 'dotted dotted_color':'dotted'}}"></text>
+            </text>
+          </view>
+        </view>
+        <!--打卡  -->
+        <view class='punch'>
+          <view class='tuwen_container' wx:if='{{tuwen_show}}'>
+            <textarea placeholder='此刻的感想....' placeholder-style='color:#ABB5BC' bindinput='mindInput'></textarea>
+            <view class='add_img_wrap'>
+              <view style='position:relative;display:inline-block' wx:for='{{uploadimg}}' wx:for-index='index'>
+                  <image src='../../imgs/delphoto.png' style='width:32rpx;height:32rpx;position:absolute;right:-16rpx;top:-16rpx;'  bindtap='del_img' data-index='{{index}}' mode='aspectFill'></image>
+                  <image class='add_img' src='{{item}}'></image>
+              </view>
+              <image bindtap='chooseImg' class='add_img' src='{{originimg}}'></image>
+            </view>
+            <view class='warn_wrap'>
+              <view class='warn_text'>提示:图片和文字必须填一项</view>
+               <form bindsubmit='relese' report-submit="true" class='ias_set' >
+                <button form-type='submit' type='primary' hover-class='none' disabled='{{disabled}}'>
+                     发布
+                </button>
+              </form>
+              <button class='relese_cancle' type='default' bindtap='relese_cancle'>取消</button>
+            </view>
+          </view>
+          <view class='punch_btn' style='{{bg1}}{{cl1}}'>
+            <view class='punch_btn_time'>
+              <form bindsubmit='punch' report-submit="true">
+                <button form-type='submit' plain='true' hover-class='none'>
+                  <image class='punch_btn_time_img' data-src='{{bg}}' src='{{bg}}'></image>
+                </button>
+              </form>
+              <view class='nopunch_time' wx:if='{{nopunch_time}}'>
+                {{starttime}}-{{endtime}}
+              </view>
+              <!-- <view class='nopunch_time' wx:if='{{join_punch}}'>
+                  参与打卡
+                </view> -->
+            </view>
+          </view>
+        </view>
+      </view>
+      <!--邀请好友  -->
+      <view class='ias'>
+        <!-- 设置 -->
+        <form bindsubmit='punch_set' report-submit="true" class='ias_set' style='width:auto'>
+                <button form-type='submit' plain='true' hover-class='none' style='padding-left:0'>
+                  <image src='../../imgs/setting.png'></image>
+                   <text style='right:69rpx;'>设置</text>
+                </button>
+        </form>
+        <!--邀请好友  -->
+        <button class='invite' open-type='share' plain='true' hover-class='none' style='padding-left:0'>
+          <image src='../../imgs/share01.png'></image>
+          <text class='invite_button'>邀请</text>
+        </button>
+        <!--分享成就  -->
+        <view class='share' bindtap='share'>
+          <image src='../../imgs/share02.png'></image>
+          <text>分享</text>
+        </view>
+      </view>
+      <!--参与项目的好友  -->
+      <view class='join'>
+        <view class='join_headimg_wrap' bindtap='ranking_list' style='flex:1'>
+          <view class='join_people'>参与</view>
+          <view class='join_headimg'>
+            <block wx:for='{{detail.join}}'>
+              <image src='{{item}}'></image>
+            </block>
+          </view>
+        </view>
+        <view class='ranking_list rank_2' bindtap='ranking_list' style='display:inline-flex;align-items: center;'>
+          <image class='ranking_list_one ve' src='../../imgs/no1.png'></image>
+          <text class='ve' style='flex:1'>排行榜</text>
+          <image class='ranking_list_two ve' src='../../imgs/next_icon.png'></image>
+        </view>
+
+      </view>
+    </view>
+    <!--新的消息  -->
+    <view class='news'>
+      <view class='news_num' bindtap='go_news' wx:if='{{is_msg.is_now_msg}}'>
+        你有{{is_msg.msg_num}}条新消息
+      </view>
+    </view>
+    <!--排行榜  -->
+    <view class='ranking'>
+      <view class='total_person'>
+        <text>打卡圈</text>
+        <text class='line_two'></text>
+        <text>已打卡{{detail.count}}次</text>
+      </view>
+      <view class='ranking_list_wrap'>
+        <view class='ranking_list' bindtap='tuwen_relese'>
+          <view class='relese_2'>发布</view>
+        </view>
+      </view>
+    </view>
+    <!--领取奖品 -->
+    <view class='success_punch punch1' bindtap='no_want' hidden='{{gift_show}}' style='z-index:5'>
+      <view class='go_gift'>
+        <image class='success_gift' src='../../imgs/congratulate_window.png'></image>
+        <view class='select'>已达到官方活动条件，关注公众号，正确填写您的个人信息，将按照您的填写地址为您邮寄礼品，个人信息不做其他用途。</view>
+        <button bindtap='get_gift'>去领礼品</button>
+      </view>
+    </view>
+    <!--参与打卡成功  -->
+    <!--  -->
+    <view class='success_punch' hidden='{{punch_show}}' style='z-index:6'>
+      <view class='go_gift'>
+        <image class='success_gift join_success' src='../../imgs/canyuchenggong.png'></image>
+        <view class='select join_good'>恭喜你成功参与打卡任务继续坚持打卡哟！~</view>
+        <view style='display:flex; justify-content: center; align-items: center;width:100%;position:absolute;bottom:24rpx;text-align:center'>
+            <view class='' bindtap='know' style='flex:1; color:#4CCC70;font-size:36rpx;'>知道了</view>
+            <view class='' bindtap='punch_good' wx:if='{{fid==1}}' style='flex:1;color:#4CCC70;font-size:36rpx;'>去打卡</view> 
+            <text class='' bindtap='punch_good' wx:if='{{fid!==1}}' style='flex:1; color:#4CCC70;font-size:36rpx;'>去官方打卡</text> 
+        </view>
+      </view>
+    </view>
+    <!--勋章  -->
+    <view class='model' hidden='{{medal_show}}'>
+      <image src='{{medal}}'></image>
+    </view>
+    <!--打卡成功页面  -->
+    <!--普通页面的打卡成功  -->
+    <view class='success_punch' bindtap='success_punch_mask' hidden='{{success_punch_show}}' style='z-index:6'>
+      <view class='go_gift'>
+        <image class='success_punch_img' src='../../imgs/success_window.png'></image>
+        <view class='select' style='bottom:120rpx;left:50%;margin-left:-120rpx;font-size:36rpx;color:#444E53'>{{lei}}打卡{{punchday}}天</view>
+        <button style='bottom:1rpx' open-type='share'>邀请小伙伴一起打卡</button>
+      </view>
+    </view>
+    <!--  -->
+       <!--官方页面的打卡成功  -->
+    <view class='gf_success'  style='z-index:6' hidden='{{gf_success_hidden}}' >
+      <view class='go_gift'>
+        <image class='' src='../../imgs/gf_bg.png'></image>
+        <view class='select' style='bottom:140rpx;left:50%;margin-left:-196rpx;font-size:36rpx;color:#444E53'>
+            <text style='display:block'>{{lei}}打卡{{punchday}}天</text>
+            <text style='display:block'>今天练了什么体式？</text>
+            <text>发布动态晒一下吧！</text>
+        </view>
+        <button open-type='share' plain='true' style='width:50%;position:absolute;left:0;bottom:0;line-height:2.4;border-top:1px solid #ccc;border-right:1px solid #ccc;border-radius:0 0 0 10rpx;color:#4CCC70;'>邀请好友</button>
+        <button bindtap='go_showImg' plain='true' style='width:50%;position:absolute;right:0;bottom:0;line-height:2.4;border-top:1px solid #ccc;border-radius:0 0 10rpx 0rpx;color:#4CCC70;'>去晒图</button>
+      </view>
+    </view>
+    <!--遮罩1  -->
+    <view class='mask' bindtap='success_punch_mask' hidden='{{mask_show}}'>
+      <!-- <image src='../../imgs/close.png'></image> -->
+    </view>
+    <!--遮罩1  -->
+    <view class='mask' hidden='{{mask_show1}}' bindtap='success_punch_mask1'>
+      <!-- <image src='../../imgs/close.png'></image> -->
+    </view>
+    <!--遮罩2  -->
+    <view class='mask' hidden='{{mask_show2}}' bindtap='success_punch_mask2'>
+      <!-- <image src='../../imgs/close.png'></image> -->
+    </view>
+    <!--遮罩3  -->
+    <view class='mask' hidden='{{mask_show3}}' bindtap='success_punch_mask3'>
+      <!-- <image src='../../imgs/close.png'></image> -->
+    </view>
+    <!--打卡规则  -->
+    <view class='rule1' hidden='{{rule1_show}}'>
+      <view class='rule_title'>打卡规则</view>
+      <view class='rule_text'>
+        <view>{{detail.punchinfo.system}}</view>
+        <view>打卡周期{{detail.punchinfo.pro_start}}至{{detail.punchinfo.pro_end}}</view>
+        <view class='day_s'>每天打卡时间{{detail.punchinfo.day_start}}至{{detail.punchinfo.day_end}}</view>
+      </view>
+      <view class='rule_sure' bindtap='rule_sure'>确定</view>
+    </view>
+    <!--没有图文状态  -->
+    <!-- <view class='no_message' wx:if='{{!detail.comment[0]}}'>
+      还没有图文动态
+    </view>  -->
+  </view>
+</template>
+
+
+<!-- 图文详情 -->
+<template name='tuwen_detail'>
+  <view class='punch_relese_content'>
+    <!--个人信息  -->
+    <view class='userinfo'>
+      <view class='headimg'>
+        <image src='{{tuwen_detail.myself_info.headimg}}'></image>
+        <text class='username'>{{tuwen_detail.myself_info.nickname}}</text>
+      </view>
+      <view>
+        <text class='ins_date'>{{tuwen_detail.date}}</text>
+        <text class='line_two'></text>
+        <text class='ins_day'>坚持了{{tuwen_detail.tt_day}}天</text>
+      </view>
+    </view>
+    <!--发布内容  -->
+    <view class='punch_cont'>
+      <view class='punch_cont_title' wx:if='{{tuwen_detail.cont}}'>
+        {{tuwen_detail.cont}}
+      </view>
+      <view class='punch_img'>
+        <image wx:if='{{tuwen_detail.img}}' mode='widthFix' style='width:360rpx' src='{{tuwen_detail.img}}'></image>
+      </view>
+    </view>
+    <!--评论点赞  -->
+    <view class='rever'>
+      <view>
+        <view bindtap='imgHeart' data-index='{{index}}' style='display:inline-block'>
+          <image src='../../imgs/like_icon_nor.png' wx:if='{{!tuwen_detail.is_heart}}'></image>
+          <image src='../../imgs/like_icon_press.png' wx:if='{{tuwen_detail.is_heart}}'></image>
+        </view>
+        <text class='dianzan_num'>{{tuwen_detail.heart_num}}</text>
+      </view>
+      <view class='rever_wrap' bindtap='rever' data-id='{{tuwen_detail.id}}' data-uid='{{tuwen_detail.uid}}'>
+        <image src='../../imgs/review_icon.png'></image>
+        <text class='rever_num'>{{tuwen_detail.comment_num}}</text>
+      </view>
+    </view>
+    <!--点赞头像  -->
+    <view class='dianzan_info'>
+      <view class='dianzan_info_wrap'>
+        <view class='dianzan_info_img_wrap'>
+          <image src='../../imgs/like02_icon.png'></image>
+        </view>
+        <view wx:for='{{tuwen_detail.head_portrait}}' wx:if='{{tuwen_detail.head_portrait.length>0}}' class='dianzan_info_img_wrap'>
+          <image src='{{item}}'></image>
+        </view>
+      </view>
+    </view>
+
+    <!--评论内容  -->
+    <view class='rever_cont' wx:for='{{tuwen_detail.comment}}' wx:for-index='index'>
+      <view class='reply'>
+        <view wx:if="{{item.to_uid_nickname}}">
+          <text class='rever_cont_name' bindtap='reply' data-id='{{item.id}}' data-uid='{{item.from_uid}}'>{{item.from_uid_nickname}} 回复 {{item.to_uid_nickname}} : </text>
+          <text class='replay_cont'>{{item.cont}}</text>
+        </view>
+        <view wx:else>
+          <text bindtap='reply' class='rever_cont_name' data-index='{{index}}' data-id='{{item.id}}' data-uid='{{item.from_uid}}'>{{item.from_uid_nickname}} : </text>
+          <text class='rever_cont_detail'>{{item.cont}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='mask' hidden='{{mask_show}}' bindtap='success_punch_mask'> </view>
+  <!--给予回复  -->
+  <view class='rever_win' wx:if='{{reply_win_show}}'>
+    <textarea class='rever_win_text' maxlength='-1' placeholder='回复：{{tuwen_detail.comment[reply_index].from_uid_nickname}}' bindinput='reply_text'></textarea>
+    <view class='rever_win_btn'>
+      <text class='canle' bindtap='reply_canle'>取消</text>
+      <text class='sure' bindtap='reply_sure'>确定</text>
+    </view>
+  </view>
+  <!--给予评论  -->
+  <view class='rever_win' wx:if='{{rever_win_show}}'>
+    <textarea class='rever_win_text' placeholder="请填写评论内容" maxlength='-1' bindinput='rever_text'></textarea>
+    <view class='rever_win_btn'>
+      <text class='canle' bindtap='rever_canle'>取消</text>
+      <text class='sure' bindtap='rever_sure' data-index='{{index}}'>确定</text>
+    </view>
+  </view>
+</template>

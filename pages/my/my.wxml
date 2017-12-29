@@ -1,0 +1,89 @@
+<!--pages/my/my.wxml-->
+<view class='container my_container'>
+  <view class='container_wrap'>
+    <!--个人信息  -->
+    <view class='my_info'>
+      <view class='my_headimg' bindtap='go'>
+        <image src='{{headimg}}'></image>
+        <text class='username'>{{username}}</text>
+      </view>
+      <view class='good' bindtap='go_achievement'>
+        <image class='good_img' src='{{use_medal}}'></image>
+        <text>成就</text>
+        <image class='next' src='../../imgs/next_icon.png'></image>
+      </view>
+    </view>
+    <!--时间轴  -->
+    <scroll-view class='time_wrap' bindscrolltolower='lower' style="height:{{scrollHeight}}px;" scroll-y="true">
+      <view class='time_line' wx:for='{{signlist}}' wx:if='{{signlist!==null}}'>
+        <view class='time_detail'>
+          <image src='../../imgs/select_press.png'></image>
+          <view class='relese_date'>
+            {{item.day}} {{item.week}}
+          </view>
+        </view>
+        <!--项目 -->
+        <view class='my_relese'>
+          <!-- 一键打卡 -->
+           <view wx:if='{{item.status == 0}}'>
+            <view class='my_relese_title'>
+              <view class='my_relese_title_name'>#{{item.title}}#</view>
+              <view class='now_time'>{{item.ctime}}</view>
+            </view>
+            <view class='my_relese_img_cont'>
+              <view class='my_relese_img_cont' wx:if='{{item.cont}}'>{{item.cont}}</view>
+            </view>
+          </view>
+          <!-- 创建项目 -->
+          <view class='my_relese_title' wx:if='{{item.status == 2}}'>
+            <view class='my_relese_title_name'>参与了 #{{item.title}}# 项目</view>
+            <view class='now_time'>{{item.ctime}}</view>
+          </view>
+          <!-- 参与项目 -->
+          <view class='my_relese_title' wx:if='{{item.status == 1}}'>
+            <view class='my_relese_title_name'>创建了 #{{item.title}}# 项目</view>
+            <view class='now_time'>{{item.ctime}}</view>
+          </view>
+          <!-- 成就 -->
+          <view class='my_relese_title' wx:if='{{item.status == 3}}'>
+            <view class='my_relese_title_name'>获得了 #{{item.name}}# 成就</view>
+            <view class='now_time'>{{item.ctime}}</view>
+          </view>
+          <!-- 打卡圈 -->
+          <view wx:if='{{item.status == 4}}'>
+            <view class='my_relese_title'>
+              <view class='my_relese_title_name'>#{{item.f_name}}#</view>
+              <view class='now_time'>{{item.ctime}}</view>
+            </view>
+            <view class='my_relese_img' hidden="{{item.img[0]==''}}">
+              <block wx:for='{{item.img}}' wx:for-item="items">
+                <image src='{{items}}' mode='aspectFill' catchtap='previewImage' data-previewImgArray='{{item.img}}' data-previewSrc='{{items}}'></image>
+              </block>
+            </view>
+            <view class='my_relese_img_cont' hidden="{{item.cont==''}}">
+              <view class='my_relese_img_cont' wx:if='{{item.cont}}'>{{item.cont}}</view>
+            </view>
+          </view>
+
+          <!-- <view class='ins_day'>
+            坚持打卡第{{item.tt_day}}天!~
+         </view> -->
+        </view>
+      </view>
+      <!--暂无  -->
+      <view class='no' wx:if='{{!signlist[0]}}'>
+        暂无打卡记录
+      </view>
+      <view class='no_news' hidden='{{loadingmore}}'>
+        没有更多了
+      </view>
+      <!--暂无  -->
+
+    </scroll-view>
+
+
+    <!--鸡腿  -->
+    <image bindtap='reward' class='jt' src='../../imgs/jt.gif'></image>
+  </view>
+
+</view>

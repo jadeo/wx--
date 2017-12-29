@@ -1,0 +1,4 @@
+<!--newlist.wxml-->
+<import src='../punch_record_template/template.wxml'/>
+<template is='newslist' data='{{...item}}'>
+</template>

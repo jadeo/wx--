@@ -1,0 +1,5 @@
+<!--pages/punch_set/punch_set.wxml-->
+<import src='../punch_set_template/template.wxml'/>
+<template is='punch_set' data='{{...item}}'>
+
+</template>

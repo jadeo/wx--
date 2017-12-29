@@ -1,0 +1,5 @@
+<!--pages/tuwen_detail/tuwen_detail.wxml-->
+<import src='../punch_detail_template/template.wxml'/>
+ <template is='tuwen_detail' data='{{...item}}'>
+</template> 
+

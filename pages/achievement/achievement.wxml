@@ -1,0 +1,21 @@
+<!--pages/achievement/achievement.wxml-->
+<view class='ach_container'>
+   <view class='ach_info'>
+         <image src='../../imgs/achieve_bg.png'></image>
+         <view class='ach_good'>
+            <view style='margin-left:72rpx;'>打卡达人</view>
+            <view class='ach_bg'>
+               <image src='../../imgs/achieve_bg02.png'></image>
+               <view class='get_num'>已获得{{model_list.medal.get}}/{{model_list.medal.all}}</view>
+            </view> 
+         </view>  
+   </view> 
+
+   <view class='ach_list'>
+      <view class='ach_list_li'  wx:for='{{model_list}}' wx:for-index='index'>
+          <image src="{{item.medal}}"></image>
+          <view class='ach_list_ins'>{{item.min}} -{{item.max}}</view>
+      </view> 
+   </view>   
+   <view class='ach_bottom'>-根据连续打卡天数统计-</view>
+</view>

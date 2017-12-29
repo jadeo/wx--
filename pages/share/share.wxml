@@ -1,0 +1,20 @@
+<!--index.wxml-->
+<view class='index_container'>
+  <view class='index_wrap'>
+   <view class='img' bindtap='prew'> 
+     <image src="{{url[0]}}" mode='aspectFit' catchtap='previewImage' data-previewImgArray='{{url}}'></image>
+   </view> 
+   <view>
+     <button class='complete' type='primary' bindtap='postCard' disabled='{{isDisabled}}'>保存图片</button>
+  </view>
+  <!--提示  -->
+  <view class='model' hidden='{{model_show}}'>
+      <view class='model_title'>提示</view>
+      <view class='model_content'>{{content}}</view>
+      <view class='model_result' bindtap='result'>我知道了</view>
+  </view>
+  </view>
+</view>
+
+<!--遮罩  -->
+<view class='mask' hidden='{{mask_show}}'></view>

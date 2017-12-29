@@ -1,0 +1,79 @@
+<!--pages/ranking/ranking.wxml-->
+<view class='rank_wrap'>
+  <!-- 头部切换 -->
+  <view class='switch'>
+    <view>
+        <form bindsubmit='switch_tab1' report-submit="true" style='width:100%;height:100%;display:block'>
+                <button plain='true' form-type="submit"  hover-class='none' style='border:none;padding:0;line-height:2.7'>
+                        <text class="{{index==0?'active':''}}" style='font-size:32rpx;'>排行榜</text>
+                </button>
+        </form>
+    </view>    
+    <view bindtap='switch_tab2'><text class="{{index==1?'active':''}}">参与好友</text></view>
+  </view>
+  <!--排行榜  -->
+  <view class='my_rank_wrap join_container' hidden='{{rank_hidden}}'>
+   <view class='join_people_wrap'>
+      <view class='total_num'>累计总打卡次数</view>
+      <view class='num_detail'>{{rankList.num}}次</view>
+    </view>
+    <view class='rank_wrap_t'>
+      <view class='rank_list'>
+        <!-- 往后 -->
+        <view class='rank_list_wrap' wx:for='{{rankList.list}}' wx:for-index='index'>
+          <!--名次  -->
+          <view class='rank_each'>
+            <view class='rank_each'>
+              <image wx:if='{{index<3}}' src='{{rank_img[index]}}'></image>
+            </view>
+            <text class='rank_num' data-index='{{index}}' wx:if="{{index>=3}}">{{rank_num[index]}}</text>
+          </view>
+          <!--头像  -->
+          <view class='userinfo' wx:if="{{index!=='myself'}}">
+            <image src='{{item.userinfo.headimg}}'></image>
+            <text>{{item.userinfo.nickname}}</text>
+          </view>
+          <!--累计打卡天数  -->
+          <view class='total_day' wx:if="{{index!=='myself'}}">
+            {{item.tt_day}}
+          </view>
+        </view>
+      </view>
+    </view>
+    <!--我的排名  -->
+    <view class='my_rank'>
+      <view class='my_rank_list'>
+        <view class='my_img'>
+          <image src='{{myself.userinfo.headimg}}'></image>
+        </view>
+        <view class='myinfo'>
+          <view class='username'>{{myself.userinfo.nickname}}</view>
+          <text wx:if='{{myself.ranking==0}}'>暂无排名</text>
+          <text wx:else>第{{myself.ranking}}名</text>
+        </view>
+        <view class='my_totaday'>
+          <text>{{myself.tt_day}}</text>
+          <image src='../../imgs/day_icon.png'></image>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--参与好友  -->
+  <view class='join_container' hidden='{{join_hidden}}'>
+    <view class='join_people_wrap'>
+      <view class='total_num'>参与好友总人数</view>
+      <view class='num_detail'>{{data.count}}人</view>
+    </view>
+    <scroll-view scroll-y='true' style='height:{{scrollHeight}}px' bindscrolltolower='lower'>
+     <view class='join_detail' wx:for='{{joinlist}}'>
+      <view class='name'>
+        <image src='{{item.userinfo.headimg}}'></image>
+        <text>{{item.userinfo.nickname}}</text>
+      </view>
+      <view class='time'>
+        <text>{{item.time}}</text>
+      </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

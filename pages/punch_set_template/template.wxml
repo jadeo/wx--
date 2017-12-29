@@ -1,0 +1,101 @@
+<!--pages/punch_set_template/template.wxml-->
+
+<template name='punch_set'>
+
+  <!--开启打卡提醒  -->
+  <view class='container my_container'>
+  <view class="container_set">
+    <!--打卡规则  -->
+  <view class='rule_wrap'>
+      <view class="body-view" style='display:block'>
+      <text class='rule_punch'>打卡规则</text>
+      <view class='set_ins_day_title t1'>
+          <text style='display:block'>项目时间：{{ps}}~{{pe}}</text>
+          <text style='display:block'>打卡时间：{{ds}}~{{de}}</text>
+          {{system}}
+     </view>
+     <!-- <view class='set_ins_day_title t1'>
+     </view> -->
+  </view>
+  </view>
+    
+  <!--设置每天打卡时间  -->
+   <view class='set_ins_day everyday' wx:if="{{is_admin=='true'}}">
+    <view class='set_ins_day_title'>
+      设置每天打卡时间
+    </view>
+    <view class="section">
+      <view class='section_wrap'>
+        <view class='picker_wrap' bindtap='allday'>
+          <view class="picker">
+            <view class='start_time'>
+              <radio value="ba" class='radio' checked="{{allday_checked}}" bindtap='allday' />全天任意时间
+            </view>
+            <view class='next_img'>
+              <!-- <image hidden='{{select_show}}' src='../../imgs/select_icon.png'></image> -->
+            </view>
+          </view>
+        </view>
+        <view class='picker_wrap' bindtap='free' >
+          <view class="picker">
+            <view class='start_time'>
+              <radio value="xi" checked="{{free_checked}}" bindtap='free' />自定义
+            </view>
+            <view class='next_img'>
+              <!-- <image hidden='{{icon_show}}' src='../../imgs/select_icon.png'></image> -->
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class='free' hidden='{{free_hidden}}'>
+        <view class='free_start_wrap'>
+          <view class='free_wrap'>
+            <text class='free_start'>每日打卡开始时间</text>
+            <picker class='free_start_time' mode="time" value="{{day_start}}" bindchange="bindTimeChange1">
+              <view class="free_img select_time">
+                {{day_start}}
+                <image src='../../imgs/next_icon.png'></image>
+              </view>
+            </picker>
+          </view>
+        </view>
+        <view class='free_start_wrap'>
+          <view class='free_wrap'>
+            <text class='free_start'>每日打卡结束时间</text>
+            <picker class='free_start_time' mode="time" value="{{day_end}}" bindchange="bindTimeChange2">
+              <view class="free_img select_time">
+                {{day_end}}
+                <image src='../../imgs/next_icon.png'></image>
+              </view>
+            </picker>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view> 
+
+    <view class='warn_wrap'>
+      <view class="body-view">
+        <text>开启打卡提醒?(可在设置中关闭)</text>
+        <switch checked='{{warn_check}}' bindchange="switch1Change" />
+      </view>
+    </view>
+    <!--显示隐藏的内容  -->
+    <view class='warn_time_wrap'>
+      <view class='warn_time' hidden='{{warn_hidden}}'>
+        <text>每天打卡提醒时间</text>
+        <picker class='free_start_time' mode="time" value="{{timestart}}" bindchange="bindWarnChange1">
+          <view class="free_img select_time">
+            {{timestart}}
+            <image src='../../imgs/next_icon.png'></image>
+          </view>
+        </picker>
+      </view>
+    </view>
+    <!--保存按钮  -->
+    <form bindsubmit='save' report-submit="true">
+      <button  form-type='submit' type='primary' class='btn'  disabled='{{is_disabled}}'>保存</button>
+    </form>
+  </view>
+  </view>
+</template>

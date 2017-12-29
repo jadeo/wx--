@@ -1,0 +1,48 @@
+/* pages/share_select/share_select.wxss */
+.gray{
+  font-size:28rpx;
+}
+.jili,.uploadimg{
+  margin-top:20rpx;
+}
+.uploadimg image{
+    width:116rpx;
+    height: 116rpx;
+}
+.uploadimg{
+  line-height: 116rpx;
+}
+.jili{
+  height: 180rpx;
+}
+.jili_des{
+  line-height: 60rpx;
+}
+.change{
+  border:1px solid #F0F2F7;
+  width:128rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  border-radius: 25rpx;
+}
+.moban image{
+  width:210rpx;
+  height: 278rpx;
+  flex-grow: 1;
+  margin-right: 30rpx;
+}
+.moban image:last-child{
+  margin-right: 0;
+}
+.border{
+  border:2px solid #FF4057;
+  border-radius: 10rpx;
+}
+.v{
+  vertical-align: middle;
+}
+textarea {
+ width: 690rpx;
+ max-height: 96rpx;
+}

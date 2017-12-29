@@ -1,0 +1,50 @@
+<!--pages/reward/reward.wxml-->
+<view class='zs_container'>
+  <view class='zs_container_title'>赞赏计划</view>
+  <view class='zs_container_des'>您的每一分都将投入到我们的项目预算中，支持我们开发更多好用的小程序,创造更多加价值，让这个世界更加美好</view>
+  <view class='zs_li'>
+    <image class='ve' src='../../imgs/drumstick.png'></image>
+    <text class='zs_li_title ve'>请程序员吃鸡腿</text>
+    <view class='money_wrap'  data-money='6' bindtap='pay'>
+      <text class='zs_li_money ve' >
+          <text>￥6</text>
+      </text>
+    </view>
+  </view>
+   <view class='zs_li'>
+    <image class='ve' src='../../imgs/coffee.png'></image>
+    <text class='zs_li_title ve'>请设计师喝咖啡</text>
+    <view class='money_wrap'>
+      <text class='zs_li_money ve' data-money='8' bindtap='pay'>
+          <text>￥8</text>
+      </text>
+    </view>
+  </view>
+   <view class='zs_li'>
+    <image class='ve' src='../../imgs/cake.png'></image>
+    <text class='zs_li_title ve'>请小编吃下午茶</text>
+    <view class='money_wrap' data-money='18' bindtap='pay'>
+      <text class='zs_li_money ve'>
+          <text>￥18</text>
+      </text>
+    </view>
+  </view>
+   <view class='zs_li'>
+    <image class='ve' src='../../imgs/coffee.png'></image>
+    <text class='zs_li_title ve'>请所有人喝咖啡</text>
+    <view class='money_wrap' data-money='168' bindtap='pay'>
+      <text class='zs_li_money ve'>
+          <text>￥168</text>
+      </text>
+    </view>
+  </view>
+   <view class='zs_li'>
+    <image class='ve' src='../../imgs/heart.png'></image>
+    <input type='text' placeholder='请输入您的赞赏金额' placeholder-style='color:#ABB5BC;font-size:34rpx;' bindinput='money_input'></input>
+    <view class='money_wrap' bindtap='pay'>
+      <text class='zs_li_money sure ve'>
+          <text>确定</text>
+      </text>
+    </view>
+  </view>
+</view>

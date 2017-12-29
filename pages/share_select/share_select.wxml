@@ -1,0 +1,25 @@
+<!--pages/share_select/share_select.wxml-->
+<view class='container'>
+<!--输入文字  -->
+  <view class='bgf jili padding'>
+    <view class='flex'>
+      <text class='gray flex_1 jili_des'>写一句鼓励自己的话</text>
+      <text class='gray change' bindtap='change'>换一句</text>
+    </view>
+    <textarea type='text' class='black' maxlength='25' value='{{value}}' ward="hard" placeholder='{{placeholder[index].cont}}' placeholder-style='font-size:34rpx;color:#444E53' bindinput='input'/>
+    <text class='gray fr'>{{num}}/25</text>
+  </view>
+  <!--上传照片  -->
+  <view class='bgf uploadimg flex padding'>
+      <text class='flex_1 gray'>上传一张图</text>
+      <image mode='aspectFill' src='{{uploadimg?uploadimg:origin}}' bindtap='chooseImg'></image>
+  </view>
+  <!--模板  -->
+  <view class='moban flex padding mb3'>
+      <image bindtap='select1' class="{{curIndex==0?'border':''}} v" src='../../imgs/card01.png'></image>
+      <image bindtap='select2' class="{{curIndex==1?'border':''}} v" src='../../imgs/card02.png'></image>
+      <image bindtap='select3' class="{{curIndex==2?'border':''}} v" src='../../imgs/card03.png'></image>
+  </view>
+  <!--按钮  -->
+  <button class='g_btn mb3' type='primary' disabled='{{disabled}}' bindtap='post'>生成邀请卡片</button>
+</view>

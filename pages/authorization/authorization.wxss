@@ -1,0 +1,21 @@
+/* pages/authorization/authorization.wxss */
+.authorization{
+  width:690rpx;
+  margin:0 auto;
+  margin-top:114rpx;
+}
+.img_wrap{
+  width:170rpx;
+  margin:0 auto
+}
+.authorization image{
+  width:170rpx;
+  height: 190rpx;
+  margin:0 auto;
+  margin-bottom:40rpx;
+}
+.authorization .sorry{
+  font-size:28rpx;
+  color:#808C92;
+  margin-bottom:114rpx;
+}

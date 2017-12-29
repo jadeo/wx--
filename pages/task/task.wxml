@@ -1,0 +1,4 @@
+<!--index.wxml-->
+<!-- <import src='../template/template.wxml'/> -->
+<import src='../task_template/task_.wxml'/>
+<template is='task_template' data='{{...item}}'></template>

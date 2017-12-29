@@ -1,0 +1,9 @@
+/* pages/index/index.wxss */
+@import "../punch_detail_template/template.wxss";
+.fast_bg{
+  width:750rpx;
+  height: 210rpx;
+}
+.card_project{
+  margin-top:-200rpx;
+}

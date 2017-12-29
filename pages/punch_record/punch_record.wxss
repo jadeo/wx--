@@ -1,0 +1,2 @@
+/* pages/punch_record/punch_record.wxss */
+@import "../punch_record_template/template.wxss";

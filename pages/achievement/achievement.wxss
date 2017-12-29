@@ -1,0 +1,63 @@
+/* pages/achievement/achievement.wxss */
+.ach_info image{
+  width:750rpx;
+  height: 370rpx;
+}
+.ach_bg image{
+  width:229rpx;
+  height: 50rpx;
+}
+.ach_info{
+  position: relative;
+}
+.ach_good{
+  position: absolute;
+  font-size:36rpx;
+  color: #fff;
+  left:120rpx;
+  bottom:110rpx;
+}
+.get_num{
+  font-size: 28rpx;
+  position: absolute;
+  top:4rpx;
+  left:64rpx;
+}
+.ach_bg{
+  margin-top:30rpx;
+  top:4rpx;
+  left:30rpx;
+}
+.ach_bg{
+  margin-top:30rpx;
+  position: relative;
+}
+.ach_list{
+  width:690rpx;
+  margin:0 auto;
+}
+.ach_list_li{
+  width:33.3%;
+  text-align: center;
+  float: left;
+  margin-top:36rpx;
+}
+.ach_list_li image{
+  width:160rpx;
+  height: 160rpx;
+}
+.ach_list_ins {
+  font-size:28rpx;
+  color: #818C92;
+}
+.ach_bottom{
+  width:100%;
+  text-align: center;
+  color: #ABB4BB;
+  font-size: 24rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  clear:both;
+  position: fixed;
+  bottom:28rpx;
+}

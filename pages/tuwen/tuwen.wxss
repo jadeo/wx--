@@ -1,0 +1,30 @@
+/* pages/tuwen/tuwen.wxss */
+textarea{
+  width:750rpx;
+  height: 330rpx;
+  background: #fff;
+  font-size:32rpx;
+  color: #ABB4BB;
+  padding-top:30rpx;
+  padding-left:30rpx;
+  border-top:1rpx solid #DEDFE5;
+}
+.add_img_wrap image{
+  width:116rpx;
+  height: 116rpx;
+
+}
+.add_img_wrap {
+  display: flex;
+  padding:30rpx;
+  background: #fff;
+}
+.warn_text{
+  font-size:24rpx;
+  color:#ABB4BB;
+  margin:34rpx 0;
+}
+.warn_wrap{
+  width:690rpx;
+  margin: 0 auto;
+}

@@ -1,0 +1,111 @@
+<!--pages/relese/relese.wxml-->
+<!--index.wxml-->
+<!-- <import src='../template/template.wxml'/> -->
+<view class="container">
+  <!--輸入框  -->
+  <view class='relese_form'>
+    <input placeholder='请输入打卡标题（12个字以内）' placeholder-style='color:#ABB5BC' maxlength='12' bindinput='getTitle'></input>
+    <textarea placeholder='请输入打卡规则（选填）' placeholder-style='color:#ABB5BC' bindinput='getRule'></textarea>
+  </view>
+  <!--持续打卡时间  -->
+  <view class='set_ins_day'>
+    <view class='set_ins_day_title'>
+      设置打卡持续日期（默认一个月）
+    </view>
+    <radio-group class="radio-group" bindchange="radioChange">
+      <view class="radio" wx:for="{{radio_group}}" wx:for-index='index'>
+        <radio value="{{item.name}}" checked="{{item.checked}}" data-index='{{index}}'/><text>{{item.value}}</text>
+      </view>
+    </radio-group>
+    <view class="section">
+      <view class='section_wrap' hidden='{{free_hidden}}'>
+        <view class='picker_wrap'>
+          <picker mode="date" value="{{pro_start}}" bindchange="bindDateChange1">
+            <view class="picker">
+              <view class='start_time'>开始时间</view>
+              <view class='select_time'>
+                {{pro_start}}
+                <image src='../../imgs/next_icon.png'></image>
+              </view>
+            </view>
+          </picker>
+        </view>
+        <view class='picker_wrap'>
+          <picker mode="date" value="{{pro_end}}" bindchange="bindDateChange2">
+            <view class="picker">
+              <view class='start_time'>结束时间</view>
+              <view class='select_time'>
+                {{pro_end}}
+                <image src='../../imgs/next_icon.png'></image>
+              </view>
+            </view>
+          </picker>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!--开启付费  -->
+  <!-- <view class='warn_wrap' bindtap='money_warn'>
+    <view class="body-view">
+      <text>开启付费契约模式?</text>
+      <switch checked='{{money_check}}' bindchange="switch4Change" />
+    </view>
+  </view> -->
+  <!--显示隐藏的内容  -->
+  <!-- <view hidden='{{money_hidden}}'>
+    <view class='money_in_wrap'>
+      <view class='money_in'>
+        <text class='set_money'>设置参与金额</text>
+        <text>￥{{money_reset}}</text>
+      </view>
+    </view>
+    <view>
+      <view class='select_money_wrap'>
+        <view data-index="1" data-value="5" class="select_money">2</view>
+        <view data-index="1" data-value="5" class="select_money dis">5</view>
+        <view data-index="1" data-value="5" class="select_money">10</view>
+        <view data-index="1" data-value="5" class="select_money">15</view>
+        <view data-index="1" data-value="5" class="select_money dis">20</view>
+        <view data-index="1" data-value="5" class="select_money">50</view>
+      </view>
+    </view>
+  </view> -->
+
+  <!--创建规则  -->
+   <view class='rule'>
+    <!-- <view class='rule_title'>注意：创建后不可更改！</view> -->
+    <!-- <view class='rule_content'>开启该功能后用户参与打卡需要先支付契约金，每日坚持打卡，系统会记录，每日按押金/剩余项目天数进行返还，当日未打卡者当日不返还，对应的资金奖励到当日坚持打卡者。</view> -->
+  </view> 
+
+  <!--确定按钮  -->
+  <form bindsubmit='relese' report-submit="true" >
+      <button type='primary' class='btn' form-type='submit' disabled='{{is_disabled}}'>确定</button>
+  </form>
+
+
+  <!--遮罩  -->
+  <view class='mask' hidden='{{mask_show}}'></view>
+  <!--弹框  -->
+  <view class='exist' hidden='{{exist}}'  >
+      <view class='exist'>
+        <image class='' src='../../imgs/couqiaol.png'></image>
+        <view class='select' style='bottom:130rpx;left:50%;margin-left:-200rpx;font-size:36rpx;color:#444E53;text-align:center'>
+            <view>YOGA姐发现您创建的项目</view>
+            <view>已在我们的推荐项目中</view>
+            <view>立即加入#{{title1}}#</view>
+            <view> 与我们一起打卡</view>
+        </view>
+        <view class='exist_button' style='display:flex;'>
+            <view style='display:inline-block' style='width:50%;'>
+               <form bindsubmit='con_new' report-submit="true" >
+                  <button plain='true'  hover-class='none' form-type="submit" style='border:none;padding:0;width:100%;'>
+                        <text class='an' style='font-size:36rpx;width:100%;color:#ABB4BB'>继续创建</text>
+                  </button>
+              </form>
+            </view>
+            <text bindtap='join_exist' style='font-size:36rpx;'>立即加入</text>
+        </view>
+      </view>
+    </view>
+</view>

@@ -1,0 +1,3 @@
+<!--pages/more_punch/more_punch.wxml-->
+<import src='../task_template/task_.wxml'/>
+<template is='task_template' data='{{...item}}'></template>

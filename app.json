@@ -1,0 +1,64 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/tuwen_detail/tuwen_detail",
+    "pages/gift/gift",
+    "pages/tuwen/tuwen",
+    "pages/authorization/authorization",
+    "pages/task/task",
+    "pages/ranking/ranking",
+    "pages/newlist/newlist",
+    "pages/punch/punch",
+    "pages/my/my",
+    "pages/punch_detail_template/template",
+    "pages/relese/relese",
+    "pages/punch_set/punch_set",
+    "pages/share/share",
+    "pages/punch_record/punch_record",
+    "pages/punch_record_template/template",
+    "pages/achievement/achievement",
+    "pages/task_detail/task_detail",
+    "pages/task_detail_two/task_detail",
+    "pages/task_detail_three/task_detail",
+    "pages/task_detail_four/task_detail",
+    "pages/punch_set_template/template",
+    "pages/join/join",
+    "pages/reward/reward",
+    "pages/share_select/share_select",
+    "pages/task_template/task_",
+    "pages/more_punch/more_punch"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": false
+  },
+  "tabBar": {
+    "borderStyle": "black",
+    "backgroundColor": "#fff",
+    "color": "#ABB3BA",
+    "selectedColor": "#F93973",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "官方打卡",
+        "iconPath": "imgs/tabicon01_nor.png",
+        "selectedIconPath": "imgs/tabicon01_press.png"
+      },
+      {
+        "pagePath": "pages/task/task",
+        "text": "打卡任务",
+        "iconPath": "imgs/tabicon02_nor.png",
+        "selectedIconPath": "imgs/tabicon02_press.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "个人中心",
+        "iconPath": "imgs/tabicon03_nor.png",
+        "selectedIconPath": "imgs/tabicon03_press.png"
+      }
+    ]
+  }
+}

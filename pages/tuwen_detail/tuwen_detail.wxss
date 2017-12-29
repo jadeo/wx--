@@ -1,0 +1,2 @@
+/* pages/tuwen_detail/tuwen_detail.wxss */
+@import "../punch_detail_template/template.wxss";

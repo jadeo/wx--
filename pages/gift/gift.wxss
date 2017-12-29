@@ -1,0 +1,39 @@
+/* pages/gift/gift.wxss */
+@import '../punch_record_template/template.wxss';
+
+.gift_wrap{
+  width:690rpx;
+  padding:0 30rpx;
+  background: #fff;
+}
+.punch_record_name{
+  border-bottom: 0;
+}
+.form {
+ font-size:32rpx;
+ width:690rpx;
+ padding:0 30rpx;
+ height: 90rpx;
+ display: flex;
+ border-top:1rpx solid #DEDFE5;
+}
+.person{
+  color: #444C52;
+  display: inline-block;
+  width:20%;
+  margin-right:30rpx;
+  margin-top:25rpx;
+}
+.adress{
+  color: #ABB3BA;
+  width:83%;
+  margin-top:20rpx;
+}
+.form_wrap{
+  width:750rx;
+  background: #fff;
+}
+button{
+  width:90%;
+  margin: 60rpx auto;
+}

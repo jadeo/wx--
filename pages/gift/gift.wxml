@@ -1,0 +1,29 @@
+<!--pages/gift/gift.wxml-->
+<import src='../punch_record_template/template.wxml'/>
+<view class='container'>
+    <view class='gift_wrap'>
+        <template is='punch_gift_info' data='{{...item}}'>
+        </template>
+    </view>
+
+    <view class='form_wrap'>
+       <view class='form'>
+                <text class='person'>收货人</text>
+                <input class='adress' bindinput='getName' placeholder='请输入收货人的姓名（必填）'></input>
+        </view>
+         <view class='form' >
+                <text class='person'>收货地址</text>
+                <input class='adress' bindinput='getaddress'  placeholder='请输入收货地址（必填）'></input>
+        </view>
+         <view class='form' >
+                <text class='person'>手机号</text>
+                <input class='adress' bindinput='getPhone'  placeholder='请输入收货人的手机号（必填）'></input>
+        </view>
+         <view class='form' >
+                <text class='person'>微信号</text>
+                <input class='adress' bindinput='getWeixin' placeholder='请输入收货人的微信号（选填）'></input>
+        </view>
+    </view>
+
+    <button type="primary" bindtap='save' disabled='{{disabled}}'>保存</button>
+</view>

@@ -1,0 +1,97 @@
+<!--pages/task_template/task_.wxml-->
+<template name='task_template'>
+  <view class="container mycontainer">
+  <!--发布  -->
+  <view class='relese_btn' bindtap='go_relese' wx:if='{{task_true}}'>
+    <image src='../../imgs/fabu.png'></image>
+  </view>
+  <!--推荐打卡  -->
+  <view class='tuijian_punch title_punch' wx:if='{{task_true}}' >
+    <view class='tuijian_punch_title_two' style='align-items: center;  justify-content: center;'>
+       <view class='title one_tuijian'>推荐打卡</view>
+
+       <view class='title two_more' hidden='{{more_show}}'>
+        <form bindsubmit='more_punch' report-submit="true" class='ias_set'>
+                <button plain='true' form-type='submit'  hover-class='none' style='border:none;padding:0'>
+                     <text style='display:inline-block;font-size:28rpx;color:#828D93;'>更多打卡</text>
+                    <image src='../../imgs/next_icon.png' style='width:15rpx;height:26rpx;margin-left:10rpx;'></image>  
+                </button>
+        </form>
+       </view>
+    </view>
+    <scroll-view scroll-x style="width: 100%" class='scroll'>
+      <view class='scroll_list' wx:for="{{data.carousel}}" wx:for-index='index'  data-id='{{item.id}}'  data-index='{{index}}' data-color='{{item.color}}' bindtap='go_punch'>
+        <image src="../../imgs/cardbg_01{{item.color}}.png" class="slide-image"  data-index='{{index}}'/>
+        <view class='tuijian_punch_detail'>
+          <view class='tuijian_punch_detail_title'>{{item.title}}护手霜上海市</view>
+          <view class='tuijian_punch_detail_ps' style='display:flex;align-items: center;' >
+            <view class='task_num tuijian_punch_detail_num ve' style='flex:1'>
+              <image class='ve' src='../../imgs/card_people_icon.png'></image>
+              <text class='ve'>{{item.people}}人</text>
+            </view>
+            <view class='ve join_wrap' data-index='{{index}}' style='margin-left:20rpx;margin-top:-10rpx;'>
+              <view class='join_wrap_mask'></view>
+              <text class='join_tuijian' wx:if='{{item.is_in==true}}'>{{join_text}}</text>
+              <text class='join_tuijian' wx:if='{{item.is_in==false}}'>{{join_text1}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+  <!--我的打卡项目  -->
+  <view class='my_punch title_punch'>
+    <view class='title' wx:if='{{task_true}}'>我的打卡</view>
+    <view class='title' wx:if='{{more_true}}'>全部</view>
+    <scroll-view class='card_wrap1'>
+      <!--打卡项目  -->
+      <view class='card' wx:for='{{taskList}}' wx:for-index='index'>
+        <view class='task_item' bindtouchstart='touchS' bindtouchmove='touchM' touchend='touchE' style='{{item.txtStyle}}' data-index='{{index}}'>
+          <image class='card_bg' src='../../imgs/cardbg0{{item.color}}.png'></image>
+          <view class='card_wrap'>
+            <!--生成二维码  -->
+            <view class='task_top'>
+              <view class='task_num'>
+                <image src='../../imgs/card_people_icon.png'></image>
+                <text>{{item.people}}人</text>
+              </view>
+              <view class='code' bindtap='new_code' data-index='{{index}}' data-color='{{item.color}}' data-id='{{item.id}}' wx:if='{{task_true}}'>
+                <image src='../../imgs/card_qc_icon.png'></image>
+                <text>邀请好友</text>
+              </view>
+              <view class='ve join_wrap' data-index='{{index}}' wx:if='{{more_true}}' >
+                  <view class='join_wrap_mask'></view>
+                  <text class='join_tuijian' wx:if='{{item.is_participate==1}}' >{{join_text}}</text>
+                  <text class='join_tuijian' wx:if='{{item.is_participate==0}}'>{{join_text1}}</text>
+            </view>
+            </view>
+            <!--打卡项目名称  -->
+            <view class='card_middle' data-color='{{item.color}}' bindtap='go_punch' data-id='{{item.id}}'>
+              <image wx:if='{{item.is_clock==0}}' src='../../imgs/card_succse.png'></image>
+              <text class='card_middle_title'>{{item.title}}</text>
+            </view>
+            <!--打卡时间  -->
+            <view class='card_bottom'>
+              <image wx:if='{{item.pro_start}}' src='../../imgs/card_time_icon.png'></image>
+              <text>{{item.pro_start}}</text>
+              <text style='margin:0 5rpx'>至</text>
+              <text wx:if="{{item.pro_end=='2038-01-19'}}">拥有完美人生</text>
+              <text wx:else>{{item.pro_end}}</text>
+            </view>
+          </view>
+        </view>
+        <view class='del' bindtap='delItem' data-index='{{index}}' data-id='{{item.id}}'>
+          <image src='../../imgs/delete_button.png'></image>
+        </view>
+      </view>
+      <!--没有打卡项目时  -->
+      <view class='first_task' wx:if='{{data.prompt==true || !taskList[0]}}'>
+        <image src='../../imgs/nocard_icon.png'></image>
+        <view>
+          21天习惯养成
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+</template>

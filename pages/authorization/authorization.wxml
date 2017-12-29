@@ -1,0 +1,11 @@
+<!--pages/authorization/authorization.wxml-->
+<view class='container'>
+    <view class='authorization'>
+        <view class='img_wrap'>
+                  <image src='../../imgs/reshouquan.png'></image>
+        </view>
+        <view class='sorry'>对不起，您没有授权，瑜伽打卡小程序无法进入，
+    授权内容为您的头像和ID，请重新授权</view>
+        <button type='primary' bindtap='getAgain' >重新授权</button>
+    </view>
+</view> 

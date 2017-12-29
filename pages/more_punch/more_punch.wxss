@@ -1,0 +1,2 @@
+/* pages/more_punch/more_punch.wxss */
+@import "../task_template/task_.wxss"; 

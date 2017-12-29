@@ -1,0 +1,175 @@
+<!--pages/punch_record/punch_record.wxml-->
+<template name='punch_record'>
+<!--打卡项目  -->
+<view class='punch_record_wrap'>
+    <view class='punch_card'>
+      <!--打卡项目名字  -->
+      <view class='punch_record_name'>
+      <!--头像  -->
+            <view class='head_img'>
+                  <image src='{{record.userinfo.myinfo.headimg}}'></image>
+            </view>
+      <!--名字  -->
+            <view class='card_id'>
+                  <view class='card_name'>{{record.record_title.title}}</view>
+                  <view class='username'>{{record.userinfo.myinfo.nickname}}</view>
+            </view>
+      </view>
+      <!--打卡天数  -->
+      <view class='card_wrap' >
+          <view class='card_day'>
+                <view class='card_day_num' wx:if='{{record.userinfo.ct_day}}'>{{record.userinfo.ct_day}}</view>
+                <view class='card_day_num' wx:else>0</view>
+                <view class='total'>连续打卡天数</view>
+          </view>
+          <view class='line'></view>
+          <view class='card_day'>
+                <view class='card_day_num' wx:if='{{record.userinfo.tt_day}}'>{{record.userinfo.tt_day}}</view>
+                <view class='card_day_num' wx:else>0</view>
+                <view class='total'>累计打卡天数</view>
+          </view>
+      </view>
+    </view>
+    <!--日历  -->
+    <view class="flex box box-tb box-align-center" style='background:#fff'>
+      <view class="calendar pink-color box box-tb" >
+            <view class="top-handle fs28 box box-lr box-align-center" style='padding:0 10rpx;'>
+                <view class="prev box box-rl" >
+                    <view class="prev-handle box box-lr box-align-center box-pack-center">
+                        <form bindsubmit='handleCalendar' report-submit="true" data-handle="prev">
+                          <button plain='true'  hover-class='none' form-type="submit" style='border:none' >
+                           <image src='../../imgs/me_next_icon.png' style='width:12rpx;height:21rpx;transform:rotate(180deg)'></image>
+                          </button>
+                        </form>
+                    </view>
+                </view>
+                <view bindtap="chooseYearAndMonth" class="date-area box box-lr box-align-center box-pack-center" style='flex:1'>{{cur_year || "--"}} 年 {{cur_month || "--"}} 月</view>
+                <view class="next box box-lr" >
+                    <view class="next-handle box box-lr box-align-center box-pack-center">
+                    <form bindsubmit='handleCalendar' report-submit="true"   data-handle="next">
+                          <button plain='true'  hover-class='none' form-type="submit" style='border:none' >
+                             <image src='../../imgs/me_next_icon.png' style='width:12rpx;height:21rpx;'></image>
+                          </button>
+                        </form>
+                    </view>
+                </view>
+            </view>
+            <view class="weeks box box-lr box-pack-center box-align-center">
+                <view class="week" wx:for="{{weeks_ch}}" wx:key="{{index}}" data-idx="{{index}}">{{item}}</view>
+            </view>
+            <view class="days box box-lr box-wrap">
+                <view wx:if="{{hasEmptyGrid}}" class="grid white-color box box-align-center box-pack-center" wx:for="{{empytGrids}}" wx:key="{{index}}" data-idx="{{index}}">
+                </view>
+                <view class="grid white-color box box-align-center box-pack-center"  wx:for="{{record.day}}" wx:key="{{index}}" data-idx="{{index}}" >
+            <view class="day {{item.is_date_clock==true ? 'active' : ''}} box box-align-center box-pack-center">{{item.date}}</view> 
+                </view>
+            </view>
+        </view>
+    </view>
+    <!--打卡记录  -->
+    <scroll-view class='punch_record' style="height: {{scrollHeight}}px;" scroll-y="true" bindscrolltolower="scrollLowerEvent" bindscrolltoupper="circlePullDownRefresh">
+        <!--打卡记录的title  -->
+        <view class='punch_record_item_title'>
+            {{record.userinfo.myinfo.nickname}}的打卡记录
+        </view>
+        <!--每一项  -->
+        <view class='punch_record_item' wx:for='{{record.record}}'>
+            <view class='punch_record_item_left'>
+                  <image src='{{item.record_userinfo.headimg}}'></image>
+            </view>
+            <view class='punch_record_item_middle'>
+                <view class='username'>{{item.record_userinfo.nickname}}</view>
+                <view class='activeday'>第{{item.tt_day}}天打卡</view>
+            </view>        
+             <view class='punch_record_item_right'>
+                {{item.ctime}}
+            </view>  
+        </view> 
+    </scroll-view>
+    <view class='nomore'>
+        没有更多了
+    </view>
+</view>
+
+
+<!--选择器  -->
+<view wx:if="{{showPicker}}" class="box box-tb">
+	<view class="picker-btns box box-lr box-pack-between box-align-center">
+		<view class="picker-btn picker-cancel" data-type="cancel" bindtap="tapPickerBtn">取消</view>
+		<view class="picker-btn picker-confirm" data-type="confirm" bindtap="tapPickerBtn">确定</view>
+	</view>
+	<picker-view class="flex" indicator-style="height: 50px;" style="width: 100%; height: 150px;" value="{{picker_value}}" bindchange="pickerChange">
+		<picker-view-column>
+			<view class="picker-view" wx:for="{{picker_year}}" style="line-height: 50px">{{item}}年</view>
+		</picker-view-column>
+		<picker-view-column>
+			<view class="picker-view" wx:for="{{picker_month}}" style="line-height: 50px">{{item}}月</view>
+		</picker-view-column>
+	</picker-view>
+</view>
+</template>
+
+<!--礼物  -->
+<template name='punch_gift_info'>
+  <view class='punch_record_name'>
+      <!--头像  -->
+            <view class='head_img'>
+                  <image src='{{userinfo.avatarUrl}}'></image>
+            </view>
+      <!--名字  -->
+            <view class='card_id'>
+                  <view class='card_name'>{{card_name}}</view>
+                  <view class='username'>{{userinfo.nickName}}<text style='margin-left:48rpx;'>已完成任务</text></view>
+            </view>
+      </view>
+</template>
+
+<!--消息列表  -->
+<template name='newslist'>
+<scroll-view>
+<block wx:for='{{newslist}}' wx:if='{{newslist[0]}}'>
+  <view class='punch_record_item' bindtap='go_heart' wx:if='{{item.type==3}}' data-id='{{item.cont_id}}'>
+            <view class='punch_record_item_left'>
+                  <image src='{{item.from_info.headimg}}'></image>
+            </view>
+            <view class='punch_record_item_middle'>
+                <view class='username'>{{item.from_info.nickname}}</view>
+                <view class='activeday'>赞了你</view>
+            </view>        
+             <view class='punch_record_item_right'>
+                <text class='newslist_year'>{{item.ctime}}</text>
+                <!-- <text class='newslist_time'>09:00</text> -->
+            </view>  
+  </view>
+  <view class='punch_record_item' bindtap='go_rever' wx:if='{{item.type==1}}' data-id='{{item.cont_id}}'>
+            <view class='punch_record_item_left'>
+                  <image src='{{item.from_info.headimg}}'></image>
+            </view>
+            <view class='punch_record_item_middle'>
+                <view class='username'>{{item.from_info.nickname}}</view>
+                <view class='activeday'>评论了你</view>
+            </view>        
+             <view class='punch_record_item_right'>
+                <text class='newslist_year'>{{item.ctime}}</text>
+                <!-- <text class='newslist_time'>09:00</text> -->
+            </view>  
+  </view>
+  <view class='punch_record_item' bindtap='go_reply' wx:if='{{item.type==2}}' data-id='{{item.cont_id}}'>
+            <view class='punch_record_item_left'>
+                  <image src='{{item.from_info.headimg}}'></image>
+            </view>
+            <view class='punch_record_item_middle'>
+                <view class='username'>{{item.from_info.nickname}}</view>
+                <view class='activeday'>回复了你</view>
+            </view>        
+             <view class='punch_record_item_right'>
+                <text class='newslist_year'>{{item.ctime}}</text>
+                <!-- <text class='newslist_time'>09:00</text> -->
+            </view>  
+  </view>
+</block>
+<view class='no' wx:if='{{!newslist[0]}}'>
+      暂无消息
+  </view>
+</scroll-view>
+</template>

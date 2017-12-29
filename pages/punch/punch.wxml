@@ -1,0 +1,90 @@
+<!--pages/punch/punch.wxml-->
+<view class='punch_container'>
+   <!--打卡项目  -->
+   <view class='card_project'>
+        <!--打卡项目名字  -->
+        <view class='card_project_name'>
+             打卡项目名字
+        </view>
+        <!--进度条  -->
+        <view class='progress_wrap' style='position:relative'>
+              <!--打卡天数  -->
+              <view>
+                  <text>已打卡{{punchday}}天</text>
+                  <text>目标天数{{targetday}}天</text>
+              </view>
+              <!--进度条  -->
+              <progress class='progress' percent="{{(punchday)/targetday*100}}" stroke-width='12'/>
+              <text class='circle' style='width:50rpx;height:50rpx;border-radius:50rpx;border:1px solid #ccc;display:inline-block'></text>
+        </view>
+   </view>
+   <!--日历  -->
+   <view class='calendar'>
+        <!--打卡记录  -->
+        <view class='calendar_time' style='display:flex;'>
+           <view class='calendar_time_left'>
+                <text>本周</text>
+                <text>9-07{{}}~9-08{{}}</text>
+           </view>
+           <view class='calendar_time_right' bindtap='punch_record'>
+                <text>打卡记录></text>
+           </view>
+        </view>
+        <!--日历  -->
+        <view class='calendar_detail'>
+            <!--周  -->
+            <view class='weekday'>
+              <text wx:for='{{weekday}}'>{{item}}</text>
+            </view>
+            <!--天  -->
+            <view class='date_detail'>
+              <text style='{{txtStyle}}'  data-value='{{startday}}'>{{startday}}</text>
+              <text wx:for='{{day}}' wx:for-index='index' data-index='{{index}}' data-value='{{item}}' style='{{bg}}{{cl}}'>{{item}}</text>
+            </view>
+        </view>
+        <!--打卡  -->
+        <view class='punch'>
+            <view class='punch_btn' bindtap='punch' style='{{bg1}}{{cl1}}'>
+                <view class='punch_btn_time'>
+                <text class='punch_value'>{{value}}</text>
+                <text wx:if="{{value}}==='未在打卡时间'">{{starttime}}    {{endtime}}</text>
+                </view>
+            </view>
+            <view>
+                <text bindtap='rule'>打卡规则</text>
+                <text>|</text>
+                <text bindtap='set'>打卡设置</text>
+            </view>
+            <!--打卡规则  -->
+            <view class='rule_wrap' wx:if='{{ruleshow}}'>
+              <view class='rule' wx:for='{{rule}}'>
+                  <text>{{item}}</text>
+              </view>
+            </view>
+        </view>
+   </view>
+   <!--排行榜  -->
+   <view class='ranking'>
+       <view class='total_person'>已有多少人打卡</view>
+       <view class='ranking_list' bindtap='ranking_list'>
+            <image></image>
+            <text>排行榜</text>
+       </view>
+   </view>
+  <!--邀请好友  -->
+  <view class='ias'>
+       <!--邀请好友  -->
+        <view class='invite'>
+              <image></image>
+              <button class='invite_button' open-type='share' plain='true'>邀请好友</button>
+        </view>
+       <!--分享成就  -->
+       <view class='share' bindtap='share'>
+             <image></image>
+            <text>分享成就</text>
+       </view>
+  </view>
+   <!--遮罩  -->
+   <view class='mask'  wx:if='{{ruleshow}}' bindtap='rule'>
+   </view>
+</view>

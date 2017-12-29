@@ -1,0 +1,114 @@
+/* pages/punch/punch.wxss */
+/*遮罩  */
+.mask{
+  width:100%;
+  height: 100%;
+  background: #000;
+  opacity: 0.6;
+  z-index:3;
+  position: fixed;
+  left:0;
+  top:0;
+}
+.progress{
+  width:690rpx;
+  border-radius:50rpx;
+  height:50rpx;
+}
+.circle{
+  position: absolute;
+  top:-20rpx;
+  right:30rpx;
+}
+/* 日历 */
+.date_detail,.weekday{
+  width:100%;
+  height:50rpx;
+  /* display: flex; */
+  /* flex-direction: row; */
+  /* flex-wrap: nowrap; */
+  overflow: hidden;
+}
+.date_detail text,.weekday text{
+  display: inline-block;
+  margin-right: 50rpx;
+  width:50rpx; 
+  height: 50rpx;
+  text-align: center;
+  align-items: center;
+}
+.date_detail text{
+  background: #ccc;
+  border-radius: 50%;
+}
+.active{
+  background: red;
+  color:#fff;
+}
+/*打卡  */
+.punch{
+  position: relative;
+}
+.punch_btn{
+  width:400rpx;
+  height: 400rpx;
+  border-radius: 50%;
+  
+  text-align: center;
+  background: red;
+}
+.punch_btn_time text{
+  display: inline-block;
+}
+.punch_btn_time .punch_value{
+  margin-top:150rpx;
+}
+
+/*打卡规则  */
+.rule_wrap{
+  width:300rpx;
+  height: 150rpx;
+  background: #ccc;
+  position: absolute;
+  left:70rpx;
+  top:200rpx;
+  z-index:4;
+}
+
+
+/*排行榜  */
+.ranking{
+  display: flex;
+}
+.ranking .total_person{
+  flex-grow: 1;
+}
+.ranking .ranking_list{
+   display: inline-flex; 
+}
+.ranking .ranking_list image{
+  width:40rpx;
+  height: 40rpx;
+}
+
+
+/*邀请好友  */
+.ias{
+display: flex;
+}
+.ias image{
+  width:40rpx;
+  height: 40rpx;
+}
+.ias .invite{
+  flex-grow: 0.6;
+}
+.invite_button{
+  display: inline-flex;
+  padding-left: 0;
+  padding-right: 0;
+  line-height: 1;
+}
+button[plain]{
+   border:1px solid #fff;
+}

@@ -1,0 +1,108 @@
+<!--pages/index/index.wxml-->
+<import src='../punch_detail_template/template.wxml' />
+<scroll-view style='height:{{scrollHeight}}px' scroll-y='true' bindscrolltolower='lower'>
+<view class='fast_wrap'>
+  <image class='fast_bg' bindtap='ranking_list' src='../../imgs/daka_bg0{{item.detail.punchinfo.color}}.png'></image>
+  <template is='punch_detail' data='{{...item}}'></template>
+  <!--图文状态  -->
+     <!--没有图文状态  -->
+  <view class='no_message' wx:if='{{!commentList[0]}}'>
+      还没有图文动态
+  </view>
+  <view  wx:if='{{commentList[0]}}' class='scroll-view'>
+    <view class='punch_relese_content'  wx:for-index='index' wx:for='{{commentList}}'>
+      <!--个人信息  -->
+      <view class='userinfo'>
+        <view class='headimg'>
+          <image src='{{item.userinfo.headimg}}'></image>
+          <text class='username'>{{item.userinfo.nickname}}</text>
+        </view>
+        <view class='userinfo_time'>
+          <text class='ins_date'>{{item.time}}</text>
+          <text class='line_two'></text>
+          <text class='ins_day'>坚持了{{item.tt_day}}天</text>
+        </view>
+      </view>
+      <!--发布内容  -->
+      <view class='punch_cont'>
+        <view class='punch_cont_title' hidden="{{item.cont=='undefined'}}">
+          {{item.cont}}
+        </view>
+        <view class='punch_img' >
+          <block wx:for='{{item.img}}' wx:for-item="items">
+             <image src='{{items}}' mode='aspectFill' catchtap='previewImage' data-previewImgArray='{{item.img}}' data-previewSrc='{{items}}'></image>
+          </block>
+        </view>
+      </view>
+      <!--评论点赞  -->
+      <view class='rever'>
+        <view  style='display:inline-flex; align-items: center;justify-content: center;margin-top:-6rpx;'>
+            <form bindsubmit='imgHeart' data-index='{{index}}'  report-submit="true" >
+                <button form-type='submit' plain='true' hover-class='none' style='padding:0'>
+                     <image src='../../imgs/like_icon_nor.png' wx:if='{{item.is_heart==false}}'></image>
+                     <image src='../../imgs/like_icon_press.png' wx:if='{{item.is_heart==true}}'></image>
+                </button>
+            </form>
+            <text class='dianzan_num' style='display:inline-block;margin-top:9rpx;'>{{item.heart_num}}</text>
+         </view>
+        <view class='rever_wrap' bindtap='rever' data-id='{{item.id}}' data-uid='{{item.uid}}' data-index='{{index}}'>
+          <image src='../../imgs/review_icon.png'></image>
+          <text class='rever_num'>{{item.comment_num}}</text>
+        </view>
+      </view>
+      <!--给予评论  -->
+
+      <!--点赞头像  -->
+      <view class='dianzan_info'>
+        <view class='dianzan_info_wrap' wx:if='{{item.head}}'>
+          <view class='dianzan_info_img_wrap'>
+            <image src='../../imgs/like02_icon.png'></image>
+          </view>
+          <view wx:for='{{item.head}}' class='dianzan_info_img_wrap'>
+            <image src='{{item}}'></image>
+          </view>
+        </view>
+      </view>
+      <!--评论内容  -->
+      <view class='rever_cont' wx:for='{{item.revers}}' wx:for-item="itemName" wx:for-index='idx'>
+        <view class='reply' data-id='{{itemName.id}}' data-uid='{{itemName.from_uid}}'>
+          <view bindtap='reply' data-index='{{idx}}' data-tindex='{{index}}' class='rever_cont_name' data-id='{{item.id}}' data-uid='{{itemName.from_uid}}' wx:if="{{itemName.to_uid_nickname}}">
+            <text class='rever_cont_name'>{{itemName.from_uid_nickname}} 回复 {{itemName.to_uid_nickname}} : </text>
+            <text class='replay_cont'>{{itemName.cont}}</text>
+          </view>
+          <view bindtap='reply' data-index='{{idx}}' data-tindex='{{index}}' class='rever_cont_name' data-id='{{item.id}}' data-uid='{{itemName.from_uid}}' wx:else>
+            <text>{{itemName.from_uid_nickname}} : </text>
+            <text class='rever_cont_detail'>{{itemName.cont}}</text>
+          </view>
+
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+    <view class='no_news' hidden='{{loadingmore}}'>
+      没有更多了
+    </view>
+</scroll-view>
+<view class='rever_win' wx:if='{{rever_win_show}}'>
+  <textarea class='rever_win_text' maxlength='-1' placeholder='请填写评论内容' placeholder-style='color:#ABB5BC' bindinput='rever_text'></textarea>
+  <view class='rever_win_btn'>
+    <text class='canle' bindtap='rever_canle'>取消</text>
+    <text class='sure' bindtap='rever_sure'>确定</text>
+  </view>
+</view>
+
+<!--给予回复  -->
+<view class='rever_win' wx:if='{{reply_win_show}}'>
+  <textarea class='rever_win_text' maxlength='-1' placeholder-style='color:#ABB5BC' placeholder='回复：{{commentList[tindex].revers[rever_index].from_uid_nickname}}' bindinput='reply_text'></textarea>
+  <view class='rever_win_btn'>
+    <text class='canle' bindtap='reply_canle'>取消</text>
+   <view class='sure' style='display:inline-block'>
+       <form bindsubmit='reply_sure' report-submit="true" >
+                <button plain='true'  hover-class='none' form-type="submit" style='display:inline;color:#444E53'>
+                     确定
+                </button>
+        </form>
+    </view>
+  </view>
+</view>

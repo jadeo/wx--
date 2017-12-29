@@ -1,0 +1,66 @@
+/* pages/join/join.wxss */
+.join_container{
+  width:100%;
+  height: 100%;
+  position:absolute;
+  background:#F0F2F7;
+}
+.join_people_wrap{
+  margin-bottom: 20rpx;  
+  border-top:1rpx solid #DEDFE5;
+
+}
+.rank_list{
+  background: #fff;
+}
+.join_container .join_people_wrap,.join_detail{
+ width:690rpx;
+ background: #fff;
+ padding:0 30rpx;
+ display: flex;
+ height: 120rpx;
+ line-height: 120rpx;
+}
+.join_people_wrap .total_num{
+  flex-grow: 1;
+  color:#828D93;
+  font-size: 32rpx;
+}
+.num_detail{
+  color:#FA3A74;
+  font-size: 40rpx;
+}
+.join_detail{
+  border-bottom:1rpx solid #DEDFE5;
+}
+.join_detail .name
+{
+  flex-grow: 1;
+}
+.name{
+  overflow: hidden;
+}
+.name image{
+  width:70rpx;
+  height: 70rpx;
+   vertical-align: middle; 
+  color: #828D93;
+  font-size:32rpx;
+  border-radius: 50%;
+  margin-right: 30rpx;
+}
+.name text{
+  text-overflow: ellipsis; 
+  overflow: hidden;
+  max-width:150px;
+  max-height: 120rpx; 
+  display: inline-block;
+   vertical-align: middle; 
+}
+.join_detail .time{
+    color: #ABB5BC;
+    font-size:28rpx;
+}
+.time text{
+  width:140rpx;
+}

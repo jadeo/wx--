@@ -1,0 +1,21 @@
+/* pages/index/index.wxss */
+ @import "../punch_detail_template/template.wxss"; 
+ .fast_wrap{
+   width:100%;
+   height: 100%;
+   position: absolute;
+   background:#F4F6F9;
+ }
+.fast_bg{
+  width:750rpx;
+  height: 210rpx;
+}
+form{
+  width:100%;
+  height: 100%;
+  display: block;
+}
+.card_project{
+  margin-top:-200rpx;
+}
+

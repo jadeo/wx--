@@ -1,0 +1,16 @@
+<!--pages/join/join.wxml-->
+<view class='join_container'>
+    <view class='join_people_wrap'>
+        <view class='total_num'>参与好友总人数</view>
+        <view class='num_detail'>{{joinlist.count}}人</view>
+    </view>
+    <view class='join_detail' wx:for='{{joinlist.list}}'>
+        <view class='name'>
+           <image src='{{item.userinfo.headimg}}'></image>
+           <text>{{item.userinfo.nickname}}</text>
+        </view>  
+        <view class='time'>
+          <text>{{item.time}}</text>
+        </view>
+    </view>
+</view>

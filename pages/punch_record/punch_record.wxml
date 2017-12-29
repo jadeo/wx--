@@ -1,0 +1,3 @@
+<import src='../punch_record_template/template.wxml' />
+<template is='punch_record' data='{{...item}}'>
+</template>

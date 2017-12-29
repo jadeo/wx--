@@ -1,0 +1,6 @@
+/* pages/punch_set/punch_set.wxss */
+@import '../relese/relese.wxss';
+
+.btn{
+  margin-top:80rpx;
+}

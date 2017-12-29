@@ -1,0 +1,62 @@
+/* pages/reward/reward.wxss */
+.zs_container{
+  padding: 0 30rpx;
+}
+.zs_container_title{
+  color:#444E53;
+  font-size:40rpx;
+ margin:30rpx 0  16rpx 0;
+}
+.zs_container_des{
+  color:#7F8C92;
+  font-size:28rpx;
+  line-height: 40rpx;
+  letter-spacing: 2;
+}
+.zs_li{
+  height: 100rpx;
+  background:#F4F6F9;
+  line-height: 100rpx;
+  display: flex;
+  padding:30rpx;
+  border-radius: 20rpx;
+  margin-top:30rpx;
+}
+.zs_li_title{
+  color:#444E53;
+  font-size:34rpx;
+  flex-grow: 1;
+}
+.zs_li image{
+  width:100rpx;
+  height: 100rpx;
+  margin-right: 10rpx;
+}
+.zs_li_money{
+  display: inline-block;
+  width:122rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+ background: linear-gradient(117deg, #fc7d6b 0%,#fa3a74 69%);
+  border-radius: 30rpx;
+}
+.zs_li_money text{
+    color:#fff;
+    font-size:34rpx;
+}
+.money_wrap{
+  height: 100%;
+  line-height: 100rpx;
+}
+.sure{
+  background:linear-gradient(117deg,rgb(153,218,73) 0%,rgb(77,205,112) 47%,rgb(77,205,112) 100%);
+
+}
+input{
+  height:100rpx;
+  /* width:80%; */
+  flex-grow: 1;
+  line-height: 100rpx;
+  padding-left:5rpx;
+}
